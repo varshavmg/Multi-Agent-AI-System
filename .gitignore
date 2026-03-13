@@ -1,0 +1,20 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+.env
+
+# Ollama model files or large data
+*.bin
+*.onnx
+*.pt
+*.model
+*.sqlite
+*.db
+
+# Others
+.DS_Store
