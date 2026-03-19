@@ -1,0 +1,10 @@
+langchain
+langchain-community
+langchain-ollama
+ollama
+python-dotenv
+requests
+pydantic
+faiss-cpu
+tiktoken
+numpy
