@@ -1,31 +1,23 @@
-from fastapi import FastAPI
+ffrom fastapi import FastAPI
 from pydantic import BaseModel
+from orchestrator.controller import run_system
 
-from Agents.planner_agent import planner_agent
-from Agents.writer_agent import writer_agent
-from Agents.critic_agent import critic_agent
-
-app = FastAPI()
+app = FastAPI(
+    title="Multi-Agent AI System",
+    description="Planner → Writer → Critic AI pipeline using Ollama",
+    version="1.0"
+)
 
 class Request(BaseModel):
     topic: str
 
+
+@app.get("/")
+def home():
+    return {"message": "Multi-Agent AI System is running 🚀"}
+
+
 @app.post("/research")
 def research(req: Request):
-
-    topic = req.topic
-
-    
-    plan = planner_agent(topic)
-
-  
-    draft = writer_agent(plan, topic)
-
-   
-    final = critic_agent(draft)
-
-    return {
-    "topic": topic,
-    "plan": plan.content if hasattr(plan, "content") else str(plan),
-    "report": final.content if hasattr(final, "content") else str(final)
-}
+    result = run_system(req.topic)
+    return result
